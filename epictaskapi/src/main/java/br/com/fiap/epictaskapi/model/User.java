@@ -1,11 +1,15 @@
 package br.com.fiap.epictaskapi.model;
 
 import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -21,6 +25,9 @@ public class User implements UserDetails {
     private String name;
     private String email;
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
 
     public User name(String name){
         Assert.notNull(name, "name is required");
@@ -61,8 +68,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return null;
+       return this.roles;
     }
 
     @Override
