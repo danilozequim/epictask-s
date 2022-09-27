@@ -21,6 +21,10 @@ public class TaskService {
        return repository.findAll(pageable);
     }
 
+    public List<Task> listAll() {
+        return repository.findAll();
+    }
+
     public void save(Task task) {
         repository.save(task);
     }
@@ -32,6 +36,8 @@ public class TaskService {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+
    
 
 }

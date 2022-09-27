@@ -34,6 +34,10 @@ public class SecurityConfiguration{
                 
                 // h2
                 .antMatchers("/h2-console/**").permitAll()
+                
+                // web
+                .antMatchers("/task/**").permitAll()
+                .antMatchers("/css/**").permitAll()
 
                 .anyRequest().denyAll()
             .and()
@@ -42,7 +46,7 @@ public class SecurityConfiguration{
             .and()
                 .headers().frameOptions().disable()
             .and()
-                .addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
+                //.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
         ;        
         return http.build();
     }
