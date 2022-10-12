@@ -1,8 +1,10 @@
 package br.com.fiap.epictaskapi.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -38,8 +40,8 @@ public class User implements UserDetails {
     @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private List<Role> roles = new ArrayList<>();
 
     public User name(String name) {
         Assert.notNull(name, "name is required");
@@ -60,6 +62,12 @@ public class User implements UserDetails {
     public User password(String password) {
         Assert.notNull(password, "password is required");
         this.password = password;
+        return this;
+    }
+
+    public User withRole(Role role){
+        Assert.notNull(role, "role is required");
+        this.roles.add(role);
         return this;
     }
 

@@ -3,8 +3,10 @@ package br.com.fiap.epictaskapi.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -12,10 +14,14 @@ import com.auth0.jwt.algorithms.Algorithm;
 import br.com.fiap.epictaskapi.model.User;
 import br.com.fiap.epictaskapi.repository.UserRepository;
 
+@Service
 public class TokenService {
     
     @Autowired
     UserRepository repository;
+
+    @Value("${epictask.jwt.secret}")
+    String secret;
 
     public boolean validate(String token) {
 

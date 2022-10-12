@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Task {
@@ -14,8 +17,14 @@ public class Task {
     private Long id;
     @NotBlank
     private String title;
+
+    @Size(min = 10, message = "Escreva uma descrição completa")
     private String description;
+    
+    @Min(0) @Max(100)
     private int score = 100;
+    
+    @Min(0) @Max(100)
     private int status = 0;
 
     public Long getId() {

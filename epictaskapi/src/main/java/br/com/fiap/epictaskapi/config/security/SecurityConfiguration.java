@@ -36,16 +36,21 @@ public class SecurityConfiguration{
                 .antMatchers("/h2-console/**").permitAll()
                 
                 // web
-                .antMatchers("/task/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/task").authenticated()
+                .antMatchers(HttpMethod.GET, "/task/delete/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/task").hasRole("ADMIN")
+
                 .antMatchers("/css/**").permitAll()
 
                 .anyRequest().denyAll()
             .and()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
+                //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            //.and()
                 .headers().frameOptions().disable()
             .and()
+                .formLogin()
+                //.loginPage("/meulogin")
                 //.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
         ;        
         return http.build();
