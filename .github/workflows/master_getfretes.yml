@@ -22,16 +22,13 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: |
-          cd epictaskapi
-          mvn clean install
-        
+        run: mvn clean install
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: '${{ github.workspace }}/epictaskapi/target/*.jar'
+          path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,5 +49,5 @@ jobs:
         with:
           app-name: 'GetFretes'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0628AAA818A34541AACD097F3AF1BCEF }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6E7857860B2847798F81930A9B4401F3 }}
           package: '*.jar'
