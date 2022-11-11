@@ -20,29 +20,29 @@ public class SecurityConfiguration{
         http
             .authorizeHttpRequests() 
                 // Tarefas
-//                 .antMatchers(HttpMethod.GET, "/api/task/**").permitAll()
-//                 .antMatchers(HttpMethod.POST, "/api/task").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/task/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/task").authenticated()
 
-//                 // Usuários
-//                 .antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
-//                 .antMatchers(HttpMethod.POST, "/api/user").permitAll()
-//                 .antMatchers(HttpMethod.DELETE, "/api/user/**").authenticated()
-//                 .antMatchers(HttpMethod.PUT, "/api/user/**").authenticated()
+                // Usuários
+                .antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/user").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/user/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/api/user/**").authenticated()
                 
-//                 // Login
-//                 .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
+                // Login
+                .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
                 
-//                 // h2
-//                 .antMatchers("/h2-console/**").permitAll()
+                // h2
+                .antMatchers("/h2-console/**").permitAll()
                 
-//                 // web
-//                 .antMatchers(HttpMethod.GET, "/task").authenticated()
-//                 .antMatchers(HttpMethod.GET, "/task/delete/**").hasRole("ADMIN")
-//                 .antMatchers(HttpMethod.POST, "/task").hasRole("ADMIN")
+                // web
+                .antMatchers(HttpMethod.GET, "/task").authenticated()
+                .antMatchers(HttpMethod.GET, "/task/delete/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/task").hasRole("ADMIN")
 
-//                 .antMatchers("/css/**").permitAll()
+                .antMatchers("/css/**").permitAll()
 
-                .anyRequest().permitAll()
+                .anyRequest().denyAll()
             .and()
                 .csrf().disable()
                 //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
